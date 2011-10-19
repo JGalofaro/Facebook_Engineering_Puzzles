@@ -1,10 +1,14 @@
 #include <iostream>
-#include <vector>
 #include <string>
 #include <cstdlib>
 #include <fstream>
 using namespace std;
 
+/**
+ * Person Class
+ * 		Holds the users name and the number of times they have been accused
+ * 		of lying.
+ */
 class person
 {
 public:
@@ -19,6 +23,9 @@ private:
     int accused;
 };
 
+/**
+ * Constructor
+ */
 person::person()
 {
     user = "";
@@ -30,27 +37,42 @@ person::~person()
     //Deconstructor
 }
 
+/*
+ * Returns the users name as a string
+ */
 string person::getName(){ return user; }
 
+/*
+ * Returns the number of times the user has been accused as an int
+ */
 int person::getAccused(){ return accused; }
 
+/*
+ * Increases the accused in by a given ammount <n>
+ */
 void person::setAccused(int n)
 {
     accused += n;
 }
 
+/*
+ * Changes the user name to <name>
+ */
 void person::setName( string name )
 {
 	user = name;
 }
+
 int main( int argc, char *argv[] )
 {
 	ifstream input;
 	input.open(argv[1]);
 	string line;
+
 	int vet;	//number of veteran users
 	bool header = true;
 
+	//Grab the first line in the file, the number of unique veteran users
 	if( input.is_open() )
 	{
 		getline( input, line );
@@ -58,6 +80,7 @@ int main( int argc, char *argv[] )
 	}
 	person *people = new person[vet];
 
+	//Set each slot to contain the name "empty" for easy lookup later on
 	for( int i = 0; i < vet; i++ )
 	{
 		people[i].setName("Empty");
